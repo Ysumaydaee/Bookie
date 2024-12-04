@@ -1,0 +1,157 @@
+.catPage {
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start;
+    background-color: antiquewhite;
+    margin-top: -3vh;
+    width: 100vw;
+    height: auto; 
+    min-height: 110vh; 
+    overflow: hidden; 
+}
+
+.catGuide ul {
+    position: relative;
+    top: -2vh;
+    width: 40vw;
+    height: 5vh;
+}
+
+.catGuide ul li {
+    display: inline;
+    margin-right: 2vh;
+}
+
+.catGuide ul li:last-child {
+    float: right;
+}
+
+.catGuide ul li:nth-child(2) {
+    margin-left: 20%;
+}
+
+
+.catGuide ul li:first-child {
+    float: left;
+}
+
+.catGuide {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    margin-left: 30%;
+    margin-top: 10vh;
+    height: 5vh;
+    font-family: cursive;
+    font-size: 1.5em;
+    border-radius: 2vh;
+    background-color: grey;
+    width: 40vw;
+    border: black solid 1px;
+    z-index: 1;
+}
+
+#bookmarkSearch {
+    margin-top: -1vh;
+}
+
+.catPage #results span .button {
+    background-color: red;
+    border: black 1px solid;
+}
+
+.catPage #results span .button:hover{
+    background-color: rgb(170, 23, 23);
+}
+
+.catPage #results #green .button {
+    background-color: rgb(22, 194, 36);
+    width: 5vw;
+    margin-bottom: 1vh;
+}
+
+.catPage #results #green .button:hover {
+    background-color: rgb(28, 151, 38);
+}
+
+#results #styler {
+    display: flex;
+    justify-content: center;
+    width: 40vw;
+    height: 15vh;
+    margin-left: 30%;
+    border-radius: 2vh;
+    font-family: cursive;
+    font-size: 1.5em;
+    background-color: rgb(95, 185, 95);
+    border: 1px black solid;
+
+}
+
+#results ul li {
+    display: inline;
+    margin-right: 3vh;
+}
+
+#results ul {
+    width: 40vw;
+    height: 15vh;
+}
+
+
+#results ul {
+    display: flex;
+    justify-content: space-between; 
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    border-radius: 10px;
+    flex-wrap: wrap; 
+}
+
+#results ul li {
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    padding: 5px;
+    margin: 0 15px;
+    text-align: center;
+    min-width: 100px;
+    box-sizing: border-box;
+    flex-grow: 0;
+    flex-shrink: 0;
+    overflow-wrap: break-word; 
+}
+
+#results ul li:last-child {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; 
+    justify-content: center;
+}
+
+#results ul li:nth-child(1),
+#results ul li:nth-child(2) {
+    max-width: 30%;
+}
+
+#results ul li input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#results ul li span {
+    display: block;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+#styler{
+    margin-top: 2vh;
+}
+
+#results .buttons .button{
+    position: relative;
+
+}

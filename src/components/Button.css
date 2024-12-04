@@ -1,0 +1,12 @@
+.button{
+    display: block;
+    background-color: rgb(36, 218, 36);
+    margin-bottom: -1vh;
+    width: 5vw;
+    height: 5vh;
+    border-radius: 1vh;
+    border: 0px;
+    font-family: cursive;
+    font-weight: bold;
+    cursor: pointer;
+}

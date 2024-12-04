@@ -1,0 +1,28 @@
+.addURL .searchBarsForUrl{
+   margin-top: 7vh;
+}
+
+.addURL{
+        display: inline-block;
+        background-color: antiquewhite;
+        margin-top: -4vh;
+        width: 100vw;
+        height: 110vh;
+    
+    
+}
+
+.labels{
+    display: block;
+    position: relative;
+    top: 3vh;
+    font-family: cursive;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-left: 30%;
+}
+
+.addURL .buttons{
+    top:20%
+}
+

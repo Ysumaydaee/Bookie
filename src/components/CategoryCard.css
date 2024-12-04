@@ -1,0 +1,20 @@
+#card {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin: 2vh;
+    background-color: rgb(89, 196, 89);
+    font-size: 2em;
+    font-family: cursive;
+    width: 25vw;
+    height: 10vh;
+    border-radius: 1vh;
+  
+}
+
+.linkCard{
+    color: black;
+    text-decoration: none;
+}
+
+

@@ -1,0 +1,13 @@
+#bar{
+    margin-left: 30%; 
+    position: relative;
+    top: 4.5vh;
+    width: 40vw;
+    height: 4vh;
+    border: 1px black solid;
+    text-align: center;
+    font-family: cursive;
+    border-radius: 1vh;
+    
+}
+
