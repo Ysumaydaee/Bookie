@@ -1,7 +1,7 @@
 {
   "name": "bookie",
   "version": "0.1.0",
-  "homepage": "https://Ysumaydaee.github.io/Bookie",
+  "homepage": "https://ysumaydaee.github.io/Bookie",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
