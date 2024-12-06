@@ -29,6 +29,7 @@ h1 {
 
 .adds{
     display: block;
+    height: fit-content;
     width: fit-content;
     margin-left: 20%;
     text-align: center;

@@ -3,7 +3,7 @@
     background-color: antiquewhite;
     margin-top: -4vh;
     width: 100vw;
-    height: 120vh;
+    height: 104vh;
 
 }
 
@@ -12,12 +12,9 @@
 }
 
 .buttons {
-    display: flex;
+    display: inline-block;
     position: relative;
     top: 50%;
-    right: 15%;
-
-
 }
 
  .buttons .button{
@@ -31,8 +28,8 @@
 .buttons2 {
     display: inline-block;
     position: relative;
-    top: 10%;
-    left: 36%;
+    top: 25vh;
+    right: 34%;
 }
 
 
@@ -41,3 +38,4 @@
     height: 10vh;
     font-size: 1vw;
 }
+

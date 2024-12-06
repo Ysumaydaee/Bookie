@@ -9,53 +9,40 @@ import AddURL from './components/AddURL';
 function App() {
 
   const [catArray, setCatArray] = useState([])
-  const [CatSearch, setCatSearch] = useState("");
-  const [catValueForURL, setCatValueForURL] = useState("");
-  const [bookmark, setBookmark] = useState("");
-  const [URL, setURL] = useState("");
-
-  const setCatSearchValue = (searchValue) => {
-    setCatSearch(searchValue)
-  }
-  const CatValueForURL = (value) => {
-    setCatValueForURL(value)
-  }
-
-  const setURLForBookmark = (value) => {
-    setURL(value)
-  }
-
-  const setBookmarkFunc = (value) => {
-    setBookmark(value)
-  }
-
+  const [searchBars, setSearchBars] = useState({
+    addCategorySearchBar:"",
+    addURLSearchBar_URL:"",
+    addURLSearchBar_bookmark:"",
+    addURLSearchBar_category:"",
+    allCategoriesSearchBar:"",
+    allBookmarksSearchBar:""
+  })
 
   const addCat = () => {
-    if (CatSearch) {
+    if (searchBars.addCategorySearchBar) {
       var arr = [...catArray]
-      if (!arr.find((cat) => (cat.name === CatSearch))) {
-        arr.push({ name: CatSearch, bookmarks: [] })
+      if (!arr.find((cat) => (cat.name === searchBars.addCategorySearchBar))) {
+        arr.push({ name: searchBars.addCategorySearchBar, bookmarks: [] })
         setCatArray(arr)
-        setCatSearch("")
       }
     }
 
   }
 
   const addURL = () => {
-    if (catValueForURL) {
+    if (searchBars.addURLSearchBar_category) {
       var catval = catArray.find((cat) => (
-        cat.name === catValueForURL
+        cat.name === searchBars.addURLSearchBar_category
       ))
       if (catval) {
         //check for redundunat bookmar. if exists, don't create new one
         var markExists = catval.bookmarks.find((mark) => (
-          mark.bookmark_name === bookmark
+          mark.bookmark_name === searchBars.addURLSearchBar_bookmark
         ))
         
         if (!markExists) {
-          if (URL && bookmark) {
-            catval.bookmarks.push({ bookmark_name: bookmark, URL: URL })
+          if (searchBars.addURLSearchBar_URL && searchBars.addURLSearchBar_bookmark) {
+            catval.bookmarks.push({ bookmark_name: searchBars.addURLSearchBar_bookmark, URL: searchBars.addURLSearchBar_URL })
           }
         }
       }
@@ -64,13 +51,12 @@ function App() {
     
 
   }
-
   const deleteMark = (markName, categoryName)=> {
     
     const catval = catArray.find((cat) => cat.name === categoryName);
   
     if (catval) {
-      catval.bookmarks = catval.bookmarks.filter(bookmark => bookmark.bookmark_name !== markName);
+      catval.bookmarks = catval.bookmarks.filter((bookmark) => bookmark.bookmark_name !== markName);
       setCatArray([...catArray]); 
     }
 
@@ -80,10 +66,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home catArray={catArray} />}></Route>
-        <Route path='/categories/:name' element={<Category arr={catArray} func={deleteMark}/>} />
-        <Route path='/add-category' element={<AddCategory func={setCatSearchValue} func2={addCat} val={CatSearch} />}></Route>
-        <Route path='/add-URL' element={<AddURL catValue={catValueForURL} func={CatValueForURL} func2={setURLForBookmark} func3={setBookmarkFunc} func4={addURL} val={catValueForURL} val2={bookmark} val3={URL} arr={catArray} />}></Route>
+        <Route path='/' element={<Home val={searchBars} func={setSearchBars} catArray={catArray} />}></Route>
+        <Route path='/categories/:name' element={<Category val={searchBars} arr={catArray}  func={deleteMark} func2={setSearchBars}/>} />
+        <Route path='/add-category' element={<AddCategory arr={catArray} func={setSearchBars} func2={addCat} val={searchBars} />}></Route>
+        <Route path='/add-URL' element={<AddURL func={setSearchBars} func2={addURL} val={searchBars} arr={catArray} />}></Route>
       </Routes>
     </BrowserRouter>
   );
