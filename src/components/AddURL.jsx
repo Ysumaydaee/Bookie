@@ -81,7 +81,7 @@ const AddURL = ({ func, func2, val, arr }) => {
                 </div>
                 <div className="searchBarsForUrl">
                     <label className="labels" htmlFor="">Category</label>
-                    <SearchBar setterValue={"addURLSearchBar_category"} value={val} placeHolder="Select a category..." list="options" array={arr} func={func} />
+                    <SearchBar options="name" setterValue={"addURLSearchBar_category"} value={val} placeHolder="Select a category..." list="options" array={arr} func={func} />
                 </div >
                 <div className="buttons2">
                     <Button formHandler={Validate} type="submit" text="Add URL " path={path}/>

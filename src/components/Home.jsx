@@ -17,14 +17,13 @@ const Home = ({ val, func, catArray }) => {
         const filteredArr = catArray.filter((cat)=>(cat.name.includes(val.allCategoriesSearchBar)));
         setFilterdArray(filteredArr)
     }, [val.allCategoriesSearchBar, catArray])
-    console.log(val)
 
     return (
         <div className='second-upper-container'>
             <div >
                 <br />
                 <h1>Home</h1>
-                <SearchBar value={val} func={func} setterValue={"allCategoriesSearchBar"} list='options' array={catArray} placeHolder="Search Category..." />
+                <SearchBar options="name" value={val} func={func} setterValue={"allCategoriesSearchBar"} list='options' array={catArray} placeHolder="Search Category..." />
                 <Button text="URL +" path="add-URL" />
                 <div id='catButton'>
                     <Button text="Category +" path="add-category" />
