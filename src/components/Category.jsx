@@ -27,6 +27,11 @@ const Category = ({ val, arr, func, func2 }) => {
 
 
     //Find an api that returns json only
+    //alternative 1 (no fetch required)
+    //https://www.google.com/s2/favicons?domain=${mark.URL}
+    //alt 2, fetch required
+    //https://api.duckduckgo.com/?q=${encodedURL}&format=json
+    //could use both, google for images for src, and duck for other relevant info of the website
     useEffect(() => {
         const fetching = (async () => {
             var requestOptions = {
@@ -37,9 +42,11 @@ const Category = ({ val, arr, func, func2 }) => {
             const arr = [...favIcons]
             bookmarks.forEach(async (mark) => {
                 try {
-                    const response = await fetch(`https://icon.horse/icon/${mark.URL}`, requestOptions)
+                    const encodedURL = encodeURIComponent(mark.URL);
+                    const response = await fetch(`https://api.duckduckgo.com/?q=${encodedURL}&format=json`, requestOptions)
                     const data = await response.json()
-                    const img = data.data.logo.url;
+                    console.log(data)
+                    const img = `https://duckduckgo.com`+data.Image;
                     arr.push(img)
                     console.log(img)
                     setFavIcons(arr)
