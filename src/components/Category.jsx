@@ -32,11 +32,12 @@ const Category = ({ val, arr, func, func2 }) => {
             var requestOptions = {
                 method: 'GET'
             };
-
+            console.log(bookmarks)
+            console.log(cat.bookmarks)
             const arr = [...favIcons]
-            cat.bookmarks.forEach(async (mark) => {
+            bookmarks.forEach(async (mark) => {
                 try {
-                    const response = await fetch(`https://api.microlink.io/?url=https://${mark.URL}`, requestOptions)
+                    const response = await fetch(`https://icon.horse/icon/${mark.URL}`, requestOptions)
                     const data = await response.json()
                     const img = data.data.logo.url;
                     arr.push(img)
@@ -51,7 +52,7 @@ const Category = ({ val, arr, func, func2 }) => {
             })
         })
         fetching();
-    }, [])
+    }, [bookmarks])
 
 
    
@@ -78,7 +79,7 @@ const Category = ({ val, arr, func, func2 }) => {
                             <div key={mark.bookmark_name} id={mark.bookmark_name}>
                                 <div id="styler">
                                     <ul>
-                                        <li><Link target="_blank" to={mark.URL}>{mark.bookmark_name}</Link></li>
+                                        <li><Link target="_blank" to={mark.URL}>{mark.bookmark_name}<br/> <br /><img width="30" src={`https://www.google.com/s2/favicons?domain=${mark.URL}`} alt={mark.bookmark_name} /></Link></li>
                                         <li>{mark.URL}</li>
                                         {/* Old value of first button bath is: path={`categories/${name}/${mark.bookmark_name}`} .change path of edit to the addURL compoennt with save url as name of the lower button, and auto fill values from mark to the page. changes are the name of h1, and the button from addURL to saveURL */}
                                         <li><span id="green"><Button path={`add-URL`} text="edit" /></span>
