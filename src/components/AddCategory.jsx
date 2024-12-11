@@ -17,7 +17,8 @@ const AddCategory = ({ arr, func, func2, val }) => {
 
     const Validate = () => {
         if (catState) {
-            if (!arr.find((e) => (e.name === val.addCategorySearchBar))) {
+            console.log(arr)
+            if (!arr.find((e) => (e.title === val.addCategorySearchBar))) {
                 func2()
                 alert("Category Created successfully!")
             }
@@ -36,9 +37,9 @@ const AddCategory = ({ arr, func, func2, val }) => {
         <div className="addCat">
             <h1 id="addcatheader">Add Category</h1>
             <form onSubmit={Validate}>
-                <SearchBar setterValue={"addCategorySearchBar"} value={val} placeHolder="Enter category name.." func={func} />
+                <SearchBar name="cat_title" setterValue={"addCategorySearchBar"} value={val} placeHolder="Enter category name.." func={func} />
                 <div className="buttons2">
-                    <Button type="submit" formHandler={Validate} text="Add Category " path=""/>
+                    <Button formHandler={Validate} type="submit" text="Add Category " path=""/>
                 </div>
             </form>
             <div className="buttons">

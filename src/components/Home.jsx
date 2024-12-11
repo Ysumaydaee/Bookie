@@ -5,16 +5,16 @@ import CategoryCard from './CategoryCard';
 import { useEffect, useState } from 'react';
 //implement search logic
 //search logic needs function here to map array to the screen based on the setValue of the search bar below, which means another useState variable. insert function here
-const Home = ({ val, func, catArray }) => {
+const Home = ({ val, func, func2, catArray }) => {
 
     const [filterdArray, setFilterdArray] = useState([]);
-
     useEffect(() => {
+        func2();
         func({...val, allCategoriesSearchBar: "" })
     }, [])
 
     useEffect(() => {
-        const filteredArr = catArray.filter((cat)=>(cat.name.includes(val.allCategoriesSearchBar)));
+        const filteredArr = catArray.filter((cat)=>(cat.title.includes(val.allCategoriesSearchBar)));
         setFilterdArray(filteredArr)
     }, [val.allCategoriesSearchBar, catArray])
 
@@ -23,7 +23,7 @@ const Home = ({ val, func, catArray }) => {
             <div >
                 <br />
                 <h1>Home</h1>
-                <SearchBar options="name" value={val} func={func} setterValue={"allCategoriesSearchBar"} list='options' array={catArray} placeHolder="Search Category..." />
+                <SearchBar options="title" value={val} func={func} setterValue={"allCategoriesSearchBar"} list='options' array={catArray} placeHolder="Search Category..." />
                 <Button text="URL +" path="add-URL" />
                 <div id='catButton'>
                     <Button text="Category +" path="add-category" />
@@ -37,7 +37,8 @@ const Home = ({ val, func, catArray }) => {
                 {
                     filterdArray.map((cat) =>
                     (
-                        <div key={cat.name} id={cat.name}><CategoryCard name={cat.name} /></div>
+                    
+                        <div key={cat.title} id={cat.title}><CategoryCard name={cat.title} /></div>
                     ))
 
                 }

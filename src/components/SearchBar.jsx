@@ -1,5 +1,5 @@
 import './SearchBar.css'
-const SearchBar = ({ options = "", setterValue ,value="",array = [], list = "", placeHolder, func = () => { } }) => {
+const SearchBar = ({ name="",options = "", setterValue ,value="",array = [], list = "", placeHolder, func = () => { } }) => {
     //need category array to be here in order to search with each character change
     if (list !== "") {
         return (
@@ -15,7 +15,7 @@ const SearchBar = ({ options = "", setterValue ,value="",array = [], list = "", 
     }
     else {
         return (
-                <input id='bar' placeholder={placeHolder}
+                <input name={name} id='bar' placeholder={placeHolder}
                 value={value.setterValue} onChange={(e) => { func({...value, [setterValue]:e.target.value})}}  />
         )
     }
