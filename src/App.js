@@ -118,7 +118,7 @@ function App() {
 
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Bookie">
       <Routes>
         <Route path='/' element={<Home val={searchBars} func={setSearchBars} func2={fetchCats} func3={setIdState} func4={fetchCat_Marks} catArray={catArray} />}></Route>
         <Route path='/categories/:name' element={<Category arr={catArray} val={searchBars} val2={idState} func2={setSearchBars} />} />
