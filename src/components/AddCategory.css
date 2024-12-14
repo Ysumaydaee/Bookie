@@ -17,6 +17,11 @@
     top: 50%;
 }
 
+.buttons .button:hover{
+    background-color: rgb(63, 179, 63);
+
+}
+
  .buttons .button{
     background-color: rgb(94, 221, 94);
     width: 10vw;

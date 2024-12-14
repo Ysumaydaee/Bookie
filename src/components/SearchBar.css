@@ -11,3 +11,9 @@
     
 }
 
+.cantEdit{
+    cursor: not-allowed;
+    pointer-events: none;
+    user-select: none;
+    background-color: rgb(199, 199, 199);
+}

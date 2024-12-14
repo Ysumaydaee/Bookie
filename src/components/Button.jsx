@@ -30,7 +30,6 @@ else if (type === "submit") {
 }
 
 else {
-
     return (
         <Link className="adds" to={`/${path}`}>
             <button className="button" onClick={func}>{text}</button>

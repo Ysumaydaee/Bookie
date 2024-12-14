@@ -5,12 +5,13 @@ import CategoryCard from './CategoryCard';
 import { useEffect, useState } from 'react';
 //implement search logic
 //search logic needs function here to map array to the screen based on the setValue of the search bar below, which means another useState variable. insert function here
-const Home = ({ val, func, func2, catArray }) => {
+const Home = ({ val, func, func2, func3, func4, catArray }) => {
 
     const [filterdArray, setFilterdArray] = useState([]);
     useEffect(() => {
+        func4();
         func2();
-        func({...val, allCategoriesSearchBar: "" })
+        func({...val, allCategoriesSearchBar: "" }) 
     }, [])
 
     useEffect(() => {
@@ -37,8 +38,8 @@ const Home = ({ val, func, func2, catArray }) => {
                 {
                     filterdArray.map((cat) =>
                     (
-                    
-                        <div key={cat.title} id={cat.title}><CategoryCard name={cat.title} /></div>
+                   
+                        <div onClick={()=>func3(cat.id)} key={cat.id} id={cat.id}><CategoryCard name={cat.title} /></div>
                     ))
 
                 }

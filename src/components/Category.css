@@ -1,13 +1,11 @@
 .catPage {
     display: flex;
     flex-direction: column; 
-    justify-content: flex-start;
     background-color: antiquewhite;
-    margin-top: -3vh;
+    margin-top: -1vh;
     width: 100vw;
-    height: auto; 
-    min-height: 110vh; 
-    overflow: hidden; 
+    min-height: 103vh; 
+
 }
 
 .catGuide ul {
@@ -27,11 +25,13 @@
 }
 
 .catGuide ul li:nth-child(2) {
-    margin-left: 20%;
+    margin-left: 16%;
 }
 
 
 .catGuide ul li:first-child {
+    
+
     float: left;
 }
 
@@ -49,12 +49,13 @@
     background-color: grey;
     width: 40vw;
     border: black solid 1px;
-    z-index: 1;
+    z-index: 5;
 }
 
 #bookmarkSearch {
     margin-top: -1vh;
 }
+
 
 .catPage #results span .button {
     background-color: red;
@@ -80,7 +81,6 @@
     justify-content: center;
     width: 40vw;
     height: 15vh;
-    margin-left: 30%;
     border-radius: 2vh;
     font-family: cursive;
     font-size: 1.5em;
@@ -119,21 +119,26 @@
     text-align: center;
     min-width: 100px;
     box-sizing: border-box;
-    flex-grow: 0;
-    flex-shrink: 0;
-    overflow-wrap: break-word; 
+    
 }
+
 
 #results ul li:last-child {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-right: 4vh;
     gap: 10px; 
     justify-content: center;
 }
 
 #results ul li:nth-child(1),
 #results ul li:nth-child(2) {
-    max-width: 30%;
+    display: flex;
+    max-height: 100px;
+    flex-direction: column;
+    overflow-y: auto;
+    max-width: 15%;
 }
 
 #results ul li input {
@@ -151,7 +156,44 @@
     margin-top: 2vh;
 }
 
-#results .buttons .button{
-    position: relative;
+
+
+#results{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: fit-content;
+    
+}
+
+#deleteCategory .button
+{
+    background-color: red;
+    font-size: 1.5em;
+    width: 10vw;
+    height: 10vh;
+}
+
+#deleteCategory{
+    margin-left: 77%;
+}
+
+.catPage .buttons {
+    margin-right: 50%;
+    margin-bottom: 5%;
+    
+}
+
+#deleteCategory .button:hover{
+    background-color: rgb(170, 23, 23);
+
+}
+
+#results > div{
+display: flex;
+flex-wrap: wrap;
+height: fit-content;
+flex-direction: column;
+margin-left: 30%;
 
 }

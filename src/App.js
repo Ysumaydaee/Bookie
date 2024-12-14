@@ -10,15 +10,19 @@ function App() {
 
 
   const [catArray, setCatArray] = useState([])
+  const [catMarkArray, setCatMarkArray] = useState([])
+  const [idState, setIdState] = useState(null)
   const [searchBars, setSearchBars] = useState({
     addCategorySearchBar: "",
     addURLSearchBar_URL: "",
     addURLSearchBar_bookmark: "",
     addURLSearchBar_category: "",
     allCategoriesSearchBar: "",
-    allBookmarksSearchBar: ""
+    allBookmarksSearchBar: "",
+    defaultURL: "",
+    defaultBookmark:"",
+    defaultCategory: ""
   })
-
 
   //recalled each time we modify a categories table
   const fetchCats = (async () => {
@@ -30,6 +34,22 @@ function App() {
       setCatArray(respJson.categories);
 
   })
+
+
+  const fetchCat_Marks =  () => {
+    const fetchMarksByCatId = (async () => {
+      const response = await fetch("http://localhost:3001/api/FetchAllBookmarks.php")
+      const respJson = await response.json()
+      if (!respJson['message']) {
+        setCatMarkArray(respJson);
+      }
+      else
+        setCatMarkArray(respJson.bookmarks);
+
+
+    })
+    fetchMarksByCatId();
+  }
 
 
   const addCat = () => {
@@ -56,20 +76,32 @@ function App() {
 
   }
 
-  const addURL = () => {
+  const addURL = (id) => {
     if (searchBars.addURLSearchBar_category) {
-      var catval = catArray.find((cat) => (
-        cat.name === searchBars.addURLSearchBar_category
-      ))
-      if (catval) {
+      const catId = catArray.find((cat) => cat.title == searchBars.addURLSearchBar_category)
+      if (catId) {
         //check for redundunat bookmar. if exists, don't create new one
-        var markExists = catval.bookmarks.find((mark) => (
-          mark.bookmark_name === searchBars.addURLSearchBar_bookmark
+        const marksForCatId = catMarkArray.filter((mark) => mark.cat_id == id)
+        var markExists = marksForCatId.find((mark) => (
+          mark.title === searchBars.addURLSearchBar_bookmark
         ))
-
         if (!markExists) {
           if (searchBars.addURLSearchBar_URL && searchBars.addURLSearchBar_bookmark) {
-            catval.bookmarks.push({ bookmark_name: searchBars.addURLSearchBar_bookmark, URL: searchBars.addURLSearchBar_URL })
+            const createBookmark = async () => {
+              const requestOpts = {
+                method: 'POST',
+                //convert to http json format 
+                body: JSON.stringify({
+                  cat_id: id,
+                  mark: searchBars.addURLSearchBar_bookmark,
+                  link: searchBars.addURLSearchBar_URL
+                })
+              }
+              await fetch("http://localhost:3001/api/createBookmark.php", requestOpts)
+            }
+
+            createBookmark();
+
           }
         }
       }
@@ -78,25 +110,21 @@ function App() {
 
 
   }
-  const deleteMark = (markName, categoryName) => {
+  
+  function editMark(){
 
-    const catval = catArray.find((cat) => cat.name === categoryName);
+  }  
 
-    if (catval) {
-      catval.bookmarks = catval.bookmarks.filter((bookmark) => bookmark.bookmark_name !== markName);
-      setCatArray([...catArray]);
-    }
-
-  }
 
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home val={searchBars} func={setSearchBars} func2={fetchCats} catArray={catArray} />}></Route>
-        <Route path='/categories/:name' element={<Category val={searchBars} arr={catArray} func={deleteMark} func2={setSearchBars} />} />
+        <Route path='/' element={<Home val={searchBars} func={setSearchBars} func2={fetchCats} func3={setIdState} func4={fetchCat_Marks} catArray={catArray} />}></Route>
+        <Route path='/categories/:name' element={<Category arr={catArray} val={searchBars} val2={idState} func2={setSearchBars} />} />
         <Route path='/add-category' element={<AddCategory arr={catArray} func={setSearchBars} func2={addCat} val={searchBars} />}></Route>
-        <Route path='/add-URL' element={<AddURL func={setSearchBars} func2={addURL} val={searchBars} arr={catArray} />}></Route>
+        <Route path='/add-URL' element={<AddURL func={setSearchBars} func2={addURL}  func3={setIdState} val={searchBars} arr={catArray} arr2={catMarkArray} />}></Route>
+        <Route path='/categories/:name/:mark' element={<AddURL func4={fetchCat_Marks} version="editMark" func={setSearchBars} func2={addURL}  func3={setIdState} val={searchBars} arr={catArray} arr2={catMarkArray} />}></Route>
       </Routes>
     </BrowserRouter>
   );
