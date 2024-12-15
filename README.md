@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# Bookie!
+## What is Bookie ?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bookie is 3 tier web application for bookmarks that can be hosted **locally**! All you need to make it work in your environment is the following tools such as:
+1. [Docker](https://www.docker.com/products/docker-desktop/) 
+2. [VSCode](https://code.visualstudio.com/) or any other code editor of your liking
+3. [MariaDB](https://mariadb.org/) 
+4. [PHP](https://www.php.net/downloads.php) a link on how to install the correct version for you is [here](https://www.youtube.com/watch?v=l-74L_8L3CU)
 
-## Available Scripts
+***
+## Preparing the environment
 
-In the project directory, you can run:
+After installing the previous tools, make sure to go to [REST API for Bookie][https://github.com/Ysumaydaee/REST-API-For-Bookie] and **clone** the repository. This repository contains the **REST API** for the application, and the **docker compose file** necessary for creating the docker image for the **MariaDB** server.
 
-### `npm start`
+Open a new CMD window at the **mariadb** directory and write the following in the CMD:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```PS:C:\\YourUser\\path\\to\\the\\mariadb: docker compose up
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Make sure **Docker is up and running** before running this command. If it ran successfully, it will deploy an image running at **3306:3306**, make sure that your localhost has 3306 open for use, or you could change it, **but you will have to change the environment variables at API server!**
 
-### `npm test`
+There is also the second image within the compose file **(adminer)** which is basically a gate for you to access the database through the browser. I have set it to 8085:8080 since I had 8085 open on my host, but you can change it to whatever works for you! **Just don't change the 8080**!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+***
+## Creating the database 
 
-### `npm run build`
+To access the database through the **adminer**, I have set the credentials as follows:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Username: root
+2. Password: example
+3. Server: db
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+if you would like, you could change these information within the **docker-compose.yml** file. After doing so, navigate and click on the **SQL Commands** tab at the left and enter the following commands:
+##### Categories table:
+```CREATE DATABASE bookmarking_db;
+USE bookmarking_db;
+CREATE TABLE categories(
+    id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL, 
+    date_added DATETIME NOT NULL,
+    PRIMARY KEY (id)
+    );
+```
+##### Bookmarks table:
+```USE bookmarking_db;
+CREATE TABLE bookmarks (
+    mark_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    cat_id MEDIUMINT NOT NULL,
+    title VARCHAR(255) NOT NULL, 
+    link VARCHAR(255) NOT NULL, 
+    date_added DATETIME NOT NULL,
+    PRIMARY KEY (mark_id),
+    FOREIGN KEY (cat_id) REFERENCES categories(id) ON DELETE CASCADE);
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+***
+## Running the API Server
 
-### `npm run eject`
+Create a new powershell window through VScode and navigate to the **=php-mysql-rest-api** and we will initialize the environment variables. For windows users, you could use:
+```$env:DB_HOST='localhost'
+$env:DB_PORT=3306
+$env:DB_DATABASE='bookmarking_db'
+$env:DB_USERNAME='root'
+$env:DB_PASSWORD='example'
+``` 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+after running this command, in the same window, run:
+```
+php -c path/to/php-files/<php.ini or php.ini-devlopement> -S localhost:<anyport that is open in your host>
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+substitute the values between **<>** with the appropriate values that work in your machine.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+***
+## Running the Front-end 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To clone the project, navigate to [Bookie!](https://github.com/Ysumaydaee/Bookie) and clone the repository. After cloning the repository, navigate to the **src** directory through a powershell/cmd window, and run the following:
 
-## Learn More
+```npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To install all the necessary resources in the **package.json**. if this doesn't work, you could track the error that appears which might be only **react-scripts** which you could download and any missing packages manually if it didn't work. Other than the normal **node_modules**, **react-router-dom** is the only other **non-vanilla** library that I have installed to configure **React Routing**.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+After setting everything correctly, at the root directory of the project, run:
 
-### Code Splitting
+```npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The React application should now be running correctly! Just make sure to remove the **homepage:** from the **package.json** before running so that it auto open at **localhost:port/** and not **localhost:port/Bookie**. As far as my testing goes, the localhost for react app is **3000**. 
 
-### Analyzing the Bundle Size
+***
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Testing the application
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+I have Recorded a video to demonstrate the capabilities of Bookie! The See the video for yourself click the [Link]()
