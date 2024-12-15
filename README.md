@@ -10,7 +10,7 @@ Bookie is 3 tier web application for bookmarks that can be hosted **locally**! A
 ***
 ## Preparing the environment
 
-After installing the previous tools, make sure to go to [REST API for Bookie][https://github.com/Ysumaydaee/REST-API-For-Bookie] and **clone** the repository. This repository contains the **REST API** for the application, and the **docker compose file** necessary for creating the docker image for the **MariaDB** server.
+After installing the previous tools, make sure to go to [REST API for Bookie](https://github.com/Ysumaydaee/REST-API-For-Bookie) and **clone** the repository. This repository contains the **REST API** for the application, and the **docker compose file** necessary for creating the docker image for the **MariaDB** server.
 
 Open a new CMD window at the **mariadb** directory and write the following in the CMD:
 
